@@ -3,7 +3,6 @@
 import hashlib
 import os
 import secrets
-import math
 
 room_inventory = {
     "101": {"type": "Deluxe", "price": 150.0, "is_booked": False},
@@ -16,7 +15,7 @@ def bookRoom(room_num, guest_name, booking_log=[]):
     if room_num not in room_inventory or room_inventory[room_num]["is_booked"]:
         return False
     room_inventory[room_num]["is_booked"] = True
-    booking_log.append("Reserved room %s for guest %s" % (room_num, guest_name))
+    booking_log.append(f"Reserved room {room_num} for guest {guest_name}")
     return True
 
 
@@ -28,8 +27,7 @@ def cancel_booking(room_num):
 
 
 def check_room_status(room_num):
-    cleaning_deposit = 25.0
-    if room_inventory.get(room_num) == None:
+    if room_inventory.get(room_num) is None:
         return False
     if not room_inventory[room_num]["is_booked"]:
         return True
